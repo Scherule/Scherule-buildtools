@@ -1,12 +1,12 @@
 package com.scherule.buildtools
 
 
-class ScheruleProjectVersion {
+public class ScheruleProjectVersion {
 
     String major = 1
     String minor = 0
     String patch = 0
-    String build = false
+    String build
 
     @Override
     String toString() {
