@@ -1,0 +1,59 @@
+buildscript {
+    ext.kotlin_version = '1.1.3'
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+bintray {
+    user = 'kboom'
+    key = '94818fa1c90d39a207aeebd7d4301b82146dedf4'
+    publications = ['BintrayPublication']
+    pkg {
+        repo = 'scherule'
+        name = 'scherule-buildtools'
+        userOrg = 'kboom'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/Scherule/Scherule-buildtools'
+    }
+}
+
+publishing {
+    publications {
+        BintrayPublication(MavenPublication) {
+            from components.java
+            groupId 'com.scherule'
+            artifactId 'scherule-buildtools'
+            version '1.1.6'
+        }
+    }
+}
+
+artifacts {
+    archives jar
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+group 'com.scherule'
+version = '1.0'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.0'
+}
